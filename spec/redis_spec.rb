@@ -701,4 +701,12 @@ describe "redis" do
     @r.get("key3").should be_nil
   end
 
+  it "should yield the Redis object when using #multi with a block" do
+    @r.multi do |multi|
+      multi.set "key1", "value1"
+    end
+
+    @r.get("key1").should == "value1"
+  end
+
 end
